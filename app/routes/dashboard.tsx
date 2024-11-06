@@ -1,4 +1,5 @@
 import { json, LoaderFunctionArgs, redirect } from '@remix-run/router'
+import { Outlet, useLocation } from '@remix-run/react'
 import { AppSidebar } from '~/components/app-sidebar.tsx'
 import {
   Breadcrumb,
@@ -29,6 +30,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Page() {
+  const location = useLocation()
+  const pathSegments = location.pathname.split('/').filter(Boolean)
+
+  const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -39,24 +45,30 @@ export default function Page() {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">Building Your Application</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
+                {pathSegments.map((segment, index) => {
+                  const path = `/${pathSegments.slice(0, index + 1).join('/')}`
+                  const isLast = index === pathSegments.length - 1
+                  const formattedSegment = capitalize(decodeURIComponent(segment))
+
+                  return (
+                    <BreadcrumbItem key={path}>
+                      {isLast ? (
+                        <BreadcrumbPage>{formattedSegment}</BreadcrumbPage>
+                      ) : (
+                        <>
+                          <BreadcrumbLink href={path}>{formattedSegment}</BreadcrumbLink>
+                          <BreadcrumbSeparator />
+                        </>
+                      )}
+                    </BreadcrumbItem>
+                  )
+                })}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+          <Outlet />
         </div>
       </SidebarInset>
     </SidebarProvider>

@@ -1,5 +1,6 @@
 'use client'
 
+import { Form } from '@remix-run/react'
 import {
   BadgeCheck,
   Bell,
@@ -96,10 +97,16 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
-            </DropdownMenuItem>
+            <Form method="POST" action="/logout" autoComplete="off" id="logoutForm">
+              <DropdownMenuItem
+                onClick={() => {
+                  const form = document.getElementById('logoutForm')
+                  if (form) (form as HTMLFormElement).submit() // Ensures `form` is not null
+                }}>
+                <LogOut />
+                Log out
+              </DropdownMenuItem>
+            </Form>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

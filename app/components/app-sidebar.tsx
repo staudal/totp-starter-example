@@ -34,43 +34,15 @@ const data = {
   },
   navMain: [
     {
-      title: 'Playground',
-      url: '#',
+      title: 'Wishlists',
+      url: '/dashboard/wishlists',
       icon: SquareTerminal,
       isActive: true,
-      items: [
-        {
-          title: 'History',
-          url: '#',
-        },
-        {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
-          url: '#',
-        },
-      ],
     },
     {
-      title: 'Models',
-      url: '#',
+      title: 'Wishes',
+      url: '/dashboard/wishes',
       icon: Bot,
-      items: [
-        {
-          title: 'Genesis',
-          url: '#',
-        },
-        {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
     },
     {
       title: 'Documentation',
