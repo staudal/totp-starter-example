@@ -1,5 +1,4 @@
 import { useLocation } from '@remix-run/react'
-import { Navigation } from '~/components/navigation.tsx'
 import { Footer } from '~/components/footer.tsx'
 import { GenericErrorBoundary } from '~/components/misc/error-boundary.tsx'
 
@@ -17,12 +16,9 @@ export function ErrorBoundary() {
   const location = useLocation()
 
   return (
-    <div className="mx-auto flex h-screen w-screen max-w-7xl flex-col px-6">
+    <div className="mx-auto flex h-screen max-w-7xl flex-col px-6">
       {/* Background. */}
       <div className="blobs !top-[50%] !-z-20 !translate-x-[-50%] !translate-y-[-50%] !opacity-20" />
-
-      {/* Navigation */}
-      <Navigation />
 
       {/* Content */}
       <div className="flex h-full w-full flex-col items-center justify-center">

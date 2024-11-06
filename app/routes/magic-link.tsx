@@ -3,7 +3,7 @@ import { authenticator } from '~/modules/auth/auth.server.ts'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.authenticate('TOTP', request, {
-    successRedirect: '/account',
+    successRedirect: '/dashboard',
     failureRedirect: '/login',
   })
 }

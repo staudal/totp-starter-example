@@ -3,12 +3,11 @@ import { Form, useLoaderData } from '@remix-run/react'
 import { json } from '@remix-run/node'
 import { authenticator } from '~/modules/auth/auth.server.ts'
 import { getSession, commitSession } from '~/modules/auth/auth-session.server.ts'
-import { Navigation } from '~/components/navigation.tsx'
 import { Footer } from '~/components/footer.tsx'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
-    successRedirect: '/account',
+    successRedirect: '/dashboard',
   })
 
   const cookie = await getSession(request.headers.get('cookie'))
@@ -43,8 +42,6 @@ export default function Login() {
 
   return (
     <div className="mx-auto flex h-screen w-screen max-w-7xl flex-col px-6">
-      <Navigation />
-
       <div className="mx-auto flex h-full w-full max-w-[350px] flex-col items-center justify-center gap-6">
         {/* Email Form */}
         <div className="flex w-full flex-col items-center gap-6">

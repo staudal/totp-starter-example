@@ -4,7 +4,6 @@ import { redirect, json } from '@remix-run/node'
 import { prisma } from '~/utils/db.server.ts'
 import { authenticator } from '~/modules/auth/auth.server.ts'
 import { getSession, destroySession } from '~/modules/auth/auth-session.server.ts'
-import { Navigation } from '~/components/navigation.tsx'
 import { Footer } from '~/components/footer.tsx'
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -44,8 +43,6 @@ export default function AdminIndex() {
     <div className="mx-auto flex h-screen w-screen max-w-7xl flex-col px-6">
       {/* Background. */}
       <div className="blobs opacity-10" />
-
-      <Navigation />
 
       {/* Content */}
       <div className="mx-auto flex h-full w-full max-w-[280px] flex-col items-center justify-center gap-6">
